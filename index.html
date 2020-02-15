@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Content Blocker Stats</title>
-  <style>
+  <!-- <style>
     table {
         border-collapse: collapse;
         border: 2px black solid;
@@ -15,7 +15,7 @@
         border: 1px black solid;
         padding: 5px;
     }
-</style>
+</style> -->
 </head>
 
 <body>
@@ -24,9 +24,80 @@
   <p>This is where we will store the scores of what each website has.</p>
   <p>words</p>
   
-  <p>more words
+  <p>hopefully a table pops up right here...???
+    <script>
+      window.onload=function(){ with (new XMLHttpRequest()) {
+        onreadystatechange=cb; open('GET','data.txt',true); responseType='text';send();
+      }}
+      function cb(){if(this.readyState===4)document.getElementById('main')
+                                                   .innerHTML=tbl(this.responseText); }
+      function tbl(csv){ // do whatever is necessary to create your table here ...
+       return csv.split('\n')
+                 .map(function(tr,i){return '<tr><td>'
+                                           +tr.replace(/\t/g,'</td><td>')
+                                           +'</td></tr>';})
+                 .join('\n'); }
+      </script>
+    <!-- <script> 
+    function loadFile(o)
+      {
+          var fr = new FileReader();
+          fr.onload = function(e)
+              {
+                  showDataFile(e, o);
+              };
+          fr.readAsText(o.files[0]);
+      }
+      
+      function showDataFile(e, o)
+      { 
+        var getCSVData = e.target.result;
+        var rows = getCSVData.split("\n");
+        var html = '<table border="1">';
+        rows.forEach((data, index) => {
+          html += "<tr>";
+          var value = data.split(",");
+      
+          html += "<td>" + value[0] + "</td>";
+          html += "<td>" + value[1] + "</td>";
+          html += "<td>" + value[2] + "</td>";
+          html += "<td>" + value[3] + "</td>";
+      
+          html += "</tr>";
+        });
+        html += '</table>';
+        document.getElementById("data").innerHTML = html;
+        document.getElementById("data").style.color="blue";
+      }
+      
+      table {
+           border-collapse: collapse;
+      }
+      </script>
 
-<!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
+Select file to read <input type="file" onchange="loadFile(data.csv)">
+<pre id="data"></pre> -->
+   <!-- <table>\n\n";
+    $f = fopen("so-csv.csv", "r");
+    while (($line = fgetcsv($f)) !== false) {
+            echo "<tr>";
+            foreach ($line as $cell) {
+                    echo "<td>" . htmlspecialchars($cell) . "</td>";
+            }
+            echo "</tr>\n";
+    }
+    fclose($f);
+    echo "\n</table> -->
+    <!-- <script>
+      CsvToHtmlTable.init({
+        csv_path: 'data.csv', 
+        element: 'table-container', 
+        allow_download: true,
+        csv_options: {separator: ',', delimiter: '"'},
+        datatables_options: {"paging": false}
+      });
+    </script> -->
+<!-- <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="d3.min.js?v=3.2.8"></script>
 
 <script type="text/javascript"charset="utf-8">
@@ -45,7 +116,7 @@
                 .append("td")
                 .text(function(d) { return d; });
     });
-</script>
+</script> -->
 
   </p>
   <a href="formationQuiz.html">A link to something as need be</a>
