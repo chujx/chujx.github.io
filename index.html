@@ -13,8 +13,22 @@
   <p>words</p>
   
   <p>more words
+
+    .
+<div id='table-container'></div>
+.
+ 
+<script>
+  CsvToHtmlTable.init({
+    csv_path: 'data/countries.csv',
+    element: 'table-container', 
+    allow_download: true,
+    csv_options: {separator: ';', delimiter: '"'},
+    datatables_options: {"paging": false}
+  });
+</script>
   </p>
-  <!-- <a href="formationQuiz.html">A link to something is need be</a> -->
+  <!-- <a href="formationQuiz.html">A link to something as need be</a> -->
 </body>
 
 </html>
