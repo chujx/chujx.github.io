@@ -25,19 +25,7 @@
   <p>words</p>
   
   <p>hopefully a table pops up right here...???
-    <script>
-      window.onload=function(){ with (new XMLHttpRequest()) {
-        onreadystatechange=cb; open('GET','data.txt',true); responseType='text';send();
-      }}
-      function cb(){if(this.readyState===4)document.getElementById('main')
-                                                   .innerHTML=tbl(this.responseText); }
-      function tbl(csv){ // do whatever is necessary to create your table here ...
-       return csv.split('\n')
-                 .map(function(tr,i){return '<tr><td>'
-                                           +tr.replace(/\t/g,'</td><td>')
-                                           +'</td></tr>';})
-                 .join('\n'); }
-      </script>
+   
     <!-- <script> 
     function loadFile(o)
       {
@@ -77,6 +65,45 @@
 
 Select file to read <input type="file" onchange="loadFile(data.csv)">
 <pre id="data"></pre> -->
+<script> 
+  function loadFile(o)
+    {
+        var fr = new FileReader();
+        fr.onload = function(e)
+            {
+                showDataFile(e, o);
+            };
+        fr.readAsText(o.files[0]);
+    }
+    
+    function showDataFile(e, o)
+    { 
+      var getCSVData = e.target.result;
+      var rows = getCSVData.split("\n");
+      var html = '<table border="1">';
+      rows.forEach((data, index) => {
+        html += "<tr>";
+        var value = data.split(",");
+    
+        html += "<td>" + value[0] + "</td>";
+        html += "<td>" + value[1] + "</td>";
+        html += "<td>" + value[2] + "</td>";
+        html += "<td>" + value[3] + "</td>";
+    
+        html += "</tr>";
+      });
+      html += '</table>';
+      document.getElementById("data").innerHTML = html;
+      document.getElementById("data").style.color="blue";
+    }
+    
+    table {
+         border-collapse: collapse;
+    }
+    </script>
+
+Select file to read <input type="file" onchange="loadFile(data.csv)">
+<pre id="data"></pre>
    <!-- <table>\n\n";
     $f = fopen("so-csv.csv", "r");
     while (($line = fgetcsv($f)) !== false) {
