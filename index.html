@@ -65,7 +65,7 @@
 
 Select file to read <input type="file" onchange="loadFile(data.csv)">
 <pre id="data"></pre> -->
-<script> 
+<!-- <script> 
   function loadFile(o)
     {
         var fr = new FileReader();
@@ -98,13 +98,77 @@ Select file to read <input type="file" onchange="loadFile(data.csv)">
     }
     
     table {
-         border-collapse: collapse;
+        border-collapse;
+        collapse;
     }
-    </script>
+    
+    </script> -->
 
 <!-- Select file to read <input type="file" onchange="loadFile(this)"> -->
-<pre id="data"></pre> 
-loadFile(data.txt)
+<!-- <pre id="data"></pre> 
+loadFile(data.txt) -->
+<script type="text/javascript">
+  function Upload() {
+      var fileUpload = document.getElementById("fileUpload");
+      var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+      if (regex.test(fileUpload.value.toLowerCase())) {
+          if (typeof (FileReader) != "undefined") {
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                  var table = document.createElement("table");
+                  var rows = e.target.result.split("\n");
+                  for (var i = 0; i < rows.length; i++) {
+                      var cells = rows[i].split(",");
+                      if (cells.length > 1) {
+                          var row = table.insertRow(-1);
+                          for (var j = 0; j < cells.length; j++) {
+                              var cell = row.insertCell(-1);
+                              cell.innerHTML = cells[j];
+                          }
+                      }
+                  }
+                  var dvCSV = document.getElementById("dvCSV");
+                  dvCSV.innerHTML = "";
+                  dvCSV.appendChild(table);
+              }
+              reader.readAsText(fileUpload.files[0]);
+          } else {
+              alert("This browser does not support HTML5.");
+          }
+      } else {
+          alert("Please upload a valid CSV file.");
+      }
+  }
+</script>
+<input type="file" id="fileUpload" />
+<input type="button" id="upload" value="Upload" onclick="Upload()" />
+<hr />
+<div id="dvCSV">
+</div>
+
+<script>
+function makeTable ( csv ) {
+
+      var rows = csv.split('\n'),
+      table = document.createElement('table'),
+      tr = null, td = null,
+      tds = null;
+  
+      for ( var i = 0; i < rows.length; i++ ) {
+          tr = document.createElement('tr');
+          tds = rows[i].split(',');
+          for ( var j = 0; j < tds.length; j++ ) {
+             td = document.createElement('td');
+             td.innerHTML = tds[j];
+             tr.appendChild(td);
+          }
+          table.appendChild(tr);
+      }
+  
+      document.appendChild(table);
+  
+  }
+</script>
    <!-- <table>\n\n";
     $f = fopen("so-csv.csv", "r");
     while (($line = fgetcsv($f)) !== false) {
