@@ -97,7 +97,7 @@
       
     }
     </script>  -->
-    <button type="button" name="load_data" id="load_data" class="btn btn-info">Load Data</button>
+    <!-- <button type="button" name="load_data" id="load_data" class="btn btn-info">Load Data</button> -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -108,7 +108,7 @@
       $(document).ready(function(){
        $('#load_data').click(function(){
         $.ajax({
-         url:"employee.csv",
+         url:"data.csv",
          dataType:"text",
          success:function(data)
          {
