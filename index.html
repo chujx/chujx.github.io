@@ -36,31 +36,7 @@
     <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
     <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
 
-    <script type="text/javascript">
-        function PickCSVFile() {
-            var MyFileOpenPicker = new Windows.Storage.Pickers.FileOpenPicker();
-            MyFileOpenPicker.fileTypeFilter.append(".csv");
-            var OutputTableRows = "";
-            MyFileOpenPicker.pickSingleFileAsync().then(
-                function (CSVFile) {
-                    if (!CSVFile) return;
-                    Windows.Storage.FileIO.readTextAsync(CSVFile).then(
-                        function (CSVText) {
-                            if (!CSVText) return;
-                            var CSVLines = CSVText.split("\r\n");
-                            for (var i = 0; i < CSVLines.length; i++) {
-                                OutputTableRows += "<tr>";
-                                var CSVValues = CSVLines[i].split(",");
-                                for (var j = 0; j < CSVValues.length; j++) {
-                                    OutputTableRows += "<td>" + CSVValues[j] + "</td>";
-                                }
-                                OutputTableRows += "</tr>";
-                            }
-                            document.getElementById(data.csv).innerHTML = OutputTableRows;
-                        });
-                });
-        }
-    </script>
+   
  <table id="OutputTable" style="color: white" border="1"></table>
     <!-- table {
       margin: 0 auto;
@@ -80,7 +56,11 @@
     th {
       border-bottom: 1px solid #d4d4d4;
     }  -->
-    <!-- <script>function successFunction(data) {
+  <script>function successFunction(data) {
+    $.ajax({
+      url: 'data.csv',
+      dataType: 'text',
+    }).done(successFunction);
       var allRows = data.split(/\r?\n|\r/);
       var table = '<table>';
       for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
@@ -114,7 +94,25 @@
       table += '</table>';
       $('body').append(table);
     }
-    </script> -->
+    // table {
+    //   margin: 0 auto;
+    //   text-align: center;
+    //   border-collapse: collapse;
+    //   border: 1px solid #d4d4d4;
+    // }
+     
+    // tr:nth-child(even) {
+    //   background: #d4d4d4;
+    // }
+     
+    // th, td {
+    //   padding: 10px 30px;
+    // }
+     
+    // th {
+    //   border-bottom: 1px solid #d4d4d4;
+    // }
+    </script> 
 
 
 <!--    
