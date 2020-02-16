@@ -16,6 +16,18 @@
         padding: 5px;
     }
 </style> -->
+  <style>
+    table {
+        border-collapse: collapse;
+        border: 2px black solid;
+        font: 12px sans-serif;
+    }
+
+    td {
+        border: 1px black solid;
+        padding: 5px;
+    }
+  </style>
 </head>
 
 <body>
@@ -25,34 +37,28 @@
   <p>words</p>
   
   <p>hopefully a table pops up right here...???
-    <!-- <script src="jquery-3.4.1.min.js"></script> -->
+    <script src="d3.min.js?v=3.2.8"></script>
 
-    <!-- $.ajax({
-      url: 'data.csv',
-      dataType: 'text',
-    }).done(successFunction);
-   -->
+        <script type="text/javascript"charset="utf-8">
+            d3.text("data.csv", function(data) {
+                var parsedCSV = d3.csv.parseRows(data);
 
+                var container = d3.select("body")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+        </script>
    
- <table id="OutputTable" style="color: white" border="1"></table>
-    <!-- table {
-      margin: 0 auto;
-      text-align: center;
-      border-collapse: collapse;
-      border: 1px solid #d4d4d4;
-    }
-     
-    tr:nth-child(even) {
-      background: #d4d4d4;
-    }
-     
-    th, td {
-      padding: 10px 30px;
-    }
-     
-    th {
-      border-bottom: 1px solid #d4d4d4;
-    }  -->
+<!--  <table id="OutputTable" style="color: white" border="1"></table>
+   
    <script>
 
     $.ajax({
@@ -138,7 +144,7 @@
        });
        
       });
-      </script>
+      </script> -->
       
 <style>
 table {
@@ -161,9 +167,9 @@ th {
 }</style>
 
   
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   function Upload() {
-      var fileUpload = document.getElementById("fileupload");//"fileUpload"
+      var fileUpload = document.getElementById("fileUpload");//"fileUpload"
       var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
       if (regex.test(fileUpload.value.toLowerCase())) {
           if (typeof (FileReader) != "undefined") {
@@ -198,7 +204,7 @@ th {
 <input type="button" id="upload" value="Upload" onclick="Upload()" />
 <hr />
 <div id="dvCSV">
-</div> 
+</div>  -->
 
   </p>
   <a href="formationQuiz.html">A link to something as need be</a>
