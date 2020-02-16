@@ -56,11 +56,14 @@
     th {
       border-bottom: 1px solid #d4d4d4;
     }  -->
-  <script>function successFunction(data) {
+  <script>
+    
     $.ajax({
       url: 'data.csv',
       dataType: 'text',
     }).done(successFunction);
+
+  function successFunction(data) {
     
       var allRows = data.split(/\r?\n|\r/);
       var table = '<table>';
